@@ -11,22 +11,16 @@ func main() {
 	// Create a logger.
 	logger := log.New(os.Stdout, "", 0)
 
-	// Create the A/D from the first period's data.
-	mfm := ad.FloatMFM(closePrices[0], low[0], high[0])
-	mfv := ad.FloatMFV(mfm, volume[0])
-	a := ad.FloatAD{}
-	accumDistrib := a.Calculate(mfv)
-	logger.Printf("Index: %d\n  MFM: %.4f\n  MFV: %.4f\n  AD: %.4f", 0, mfm, mfv, accumDistrib)
-
-	// Iterate through the rest of the periods' data.
-	for i := range open[1:] {
-		i = i + 1
-
-		// Calculate the A/D line point for this period.
-		mfm = ad.FloatMFM(closePrices[i], low[i], high[i])
-		mfv = ad.FloatMFV(mfm, volume[i])
-		accumDistrib = a.Calculate(mfv)
-		logger.Printf("Index: %d\n  MFM: %.4f\n  MFV: %.4f\n  AD: %.4f", i, mfm, mfv, accumDistrib)
+	// Iterate through the rest of the periods' data and calculate the A/D line's point for the given period.
+	var a *ad.AD
+	var result float64
+	for i := range open {
+		if a == nil {
+			a, result = ad.New(closePrices[i], low[i], high[i], volume[i])
+		} else {
+			result = a.Calculate(closePrices[i], low[i], high[i], volume[i])
+		}
+		logger.Printf("Index: %d AD: %.4f", i, result)
 	}
 }
 
