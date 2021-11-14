@@ -12,9 +12,9 @@ func main() {
 	logger := log.New(os.Stdout, "", 0)
 
 	// Create the A/D from the first period's data.
-	mfm := ad.MFMFloat(closePrices[0], low[0], high[0])
-	mfv := ad.MFVFloat(mfm, volume[0])
-	a := ad.ADFloat{}
+	mfm := ad.FloatMFM(closePrices[0], low[0], high[0])
+	mfv := ad.FloatMFV(mfm, volume[0])
+	a := ad.FloatAD{}
 	accumDistrib := a.Calculate(mfv)
 	logger.Printf("Index: %d\n  MFM: %.4f\n  MFV: %.4f\n  AD: %.4f", 0, mfm, mfv, accumDistrib)
 
@@ -23,8 +23,8 @@ func main() {
 		i = i + 1
 
 		// Calculate the A/D line point for this period.
-		mfm = ad.MFMFloat(closePrices[i], low[i], high[i])
-		mfv = ad.MFVFloat(mfm, volume[i])
+		mfm = ad.FloatMFM(closePrices[i], low[i], high[i])
+		mfv = ad.FloatMFV(mfm, volume[i])
 		accumDistrib = a.Calculate(mfv)
 		logger.Printf("Index: %d\n  MFM: %.4f\n  MFV: %.4f\n  AD: %.4f", i, mfm, mfv, accumDistrib)
 	}
