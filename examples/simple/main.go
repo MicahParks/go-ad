@@ -15,10 +15,17 @@ func main() {
 	var a *ad.AD
 	var result float64
 	for i := range open {
+		input := ad.Input{
+			Close:  closePrices[i],
+			Low:    low[i],
+			High:   high[i],
+			Volume: volume[i],
+		}
+
 		if a == nil {
-			a, result = ad.New(closePrices[i], low[i], high[i], volume[i])
+			a, result = ad.New(input)
 		} else {
-			result = a.Calculate(closePrices[i], low[i], high[i], volume[i])
+			result = a.Calculate(input)
 		}
 		logger.Printf("Index: %d AD: %.4f", i, result)
 	}
