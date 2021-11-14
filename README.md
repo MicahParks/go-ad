@@ -28,7 +28,7 @@ Use the next period's data to calculate the next point on the A/D line. Repeat f
 result = adLine.Calculate(input)
 ```
 
-## Partially complete example
+## Somewhat complete example (without data)
 ```go
 package main
 
