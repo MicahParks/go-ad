@@ -1,3 +1,4 @@
+[![Go Reference](https://pkg.go.dev/badge/github.com/MicahParks/go-ad.svg)](https://pkg.go.dev/github.com/MicahParks/go-ad) [![Go Report Card](https://goreportcard.com/badge/github.com/MicahParks/go-ad)](https://goreportcard.com/report/github.com/MicahParks/go-ad)
 # go-ad
 The Accumulation Distribution Line technical analysis algorithm implemented in Golang.
 
