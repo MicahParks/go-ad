@@ -8,7 +8,7 @@ import (
 )
 
 func BenchmarkAD_Calculate(b *testing.B) {
-	var a *ad.AD
+	var adLine *ad.AD
 	for i := range open {
 		input := ad.Input{
 			Close:  closePrices[i],
@@ -17,16 +17,16 @@ func BenchmarkAD_Calculate(b *testing.B) {
 			Volume: volume[i],
 		}
 
-		if a == nil {
-			a, _ = ad.New(input)
+		if adLine == nil {
+			adLine, _ = ad.New(input)
 		} else {
-			_ = a.Calculate(input)
+			_ = adLine.Calculate(input)
 		}
 	}
 }
 
 func BenchmarkBigAD_Calculate(b *testing.B) {
-	var a *ad.BigAD
+	var adLine *ad.BigAD
 	for i := range bigOpen {
 		input := ad.BigInput{
 			Close:  bigClose[i],
@@ -35,16 +35,16 @@ func BenchmarkBigAD_Calculate(b *testing.B) {
 			Volume: bigVolume[i],
 		}
 
-		if a == nil {
-			a, _ = ad.NewBig(input)
+		if adLine == nil {
+			adLine, _ = ad.NewBig(input)
 		} else {
-			_ = a.Calculate(input)
+			_ = adLine.Calculate(input)
 		}
 	}
 }
 
 func TestAD_Calculate(t *testing.T) {
-	var a *ad.AD
+	var adLine *ad.AD
 	var result float64
 	for i := range open {
 		input := ad.Input{
@@ -54,10 +54,10 @@ func TestAD_Calculate(t *testing.T) {
 			Volume: volume[i],
 		}
 
-		if a == nil {
-			a, result = ad.New(input)
+		if adLine == nil {
+			adLine, result = ad.New(input)
 		} else {
-			result = a.Calculate(input)
+			result = adLine.Calculate(input)
 		}
 		if result != adResults[i] {
 			t.FailNow()
@@ -66,7 +66,7 @@ func TestAD_Calculate(t *testing.T) {
 }
 
 func TestBigAD_Calculate(t *testing.T) {
-	var a *ad.BigAD
+	var adLine *ad.BigAD
 	var result *big.Float
 	for i := range bigOpen {
 		input := ad.BigInput{
@@ -76,10 +76,10 @@ func TestBigAD_Calculate(t *testing.T) {
 			Volume: bigVolume[i],
 		}
 
-		if a == nil {
-			a, result = ad.NewBig(input)
+		if adLine == nil {
+			adLine, result = ad.NewBig(input)
 		} else {
-			result = a.Calculate(input)
+			result = adLine.Calculate(input)
 		}
 		if result.Cmp(bigADResults[i]) != 0 {
 			t.FailNow()

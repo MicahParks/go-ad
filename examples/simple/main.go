@@ -8,11 +8,11 @@ import (
 )
 
 func main() {
-	// Create a logger.
+	// Create adLine logger.
 	logger := log.New(os.Stdout, "", 0)
 
 	// Iterate through the rest of the periods' data and calculate the A/D line's point for the given period.
-	var a *ad.AD
+	var adLine *ad.AD
 	var result float64
 	for i := range open {
 		input := ad.Input{
@@ -22,10 +22,10 @@ func main() {
 			Volume: volume[i],
 		}
 
-		if a == nil {
-			a, result = ad.New(input)
+		if adLine == nil {
+			adLine, result = ad.New(input)
 		} else {
-			result = a.Calculate(input)
+			result = adLine.Calculate(input)
 		}
 		logger.Printf("Index: %d AD: %.4f", i, result)
 	}

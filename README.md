@@ -19,13 +19,13 @@ input := ad.Input{
 ### Step 2
 Create the A/D data structure and get the first result
 ```go
-a, result := ad.New(input)
+adLine, result := ad.New(input)
 ```
 
 ### Step 3
 Use the next period's data to calculate the next point on the A/D line. Repeat for all periods.
 ```go
-result = a.Calculate(input)
+result = adLine.Calculate(input)
 ```
 
 ## Partially complete example
@@ -44,7 +44,7 @@ func main() {
 	logger := log.New(os.Stdout, "", 0)
 
 	// Iterate through the rest of the periods' data and calculate the A/D line's point for the given period.
-	var a *ad.AD
+	var adLine *ad.AD
 	var result float64
 	for i := range open {
 		input := ad.Input{
@@ -54,10 +54,10 @@ func main() {
 			Volume: volume[i],
 		}
 
-		if a == nil {
-			a, result = ad.New(input)
+		if adLine == nil {
+			adLine, result = ad.New(input)
 		} else {
-			result = a.Calculate(input)
+			result = adLine.Calculate(input)
 		}
 		logger.Printf("Index: %d AD: %.4f", i, result)
 	}
