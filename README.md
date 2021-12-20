@@ -2,7 +2,7 @@
 # go-ad
 The Accumulation Distribution Line technical analysis algorithm implemented in Golang.
 
-```
+```go
 import "github.com/MicahParks/go-ad"
 ```
 
