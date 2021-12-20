@@ -3,7 +3,7 @@
 The Accumulation Distribution Line technical analysis algorithm implemented in Golang.
 
 ```
-import "github.com/MicahParks/go-ma"
+import "github.com/MicahParks/go-ad"
 ```
 
 ## Usage
