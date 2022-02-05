@@ -21,6 +21,9 @@ func New(initial Input) (ad *AD, result float64) {
 
 // Calculate produces the next point on the Accumulation Distribution Line given the current period's information.
 func (ad *AD) Calculate(next Input) float64 {
+	if next.High == next.Low || next.Volume == 0 {
+		return ad.prev
+	}
 	ad.prev = (((next.Close - next.Low) - (next.High - next.Close)) / (next.High - next.Low) * next.Volume) + ad.prev
 	return ad.prev
 }

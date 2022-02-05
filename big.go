@@ -4,6 +4,8 @@ import (
 	"math/big"
 )
 
+var zero = big.NewFloat(0)
+
 // BigAD represents the state of an Accumulation Distribution Line.
 type BigAD struct {
 	prev *big.Float
@@ -25,6 +27,9 @@ func NewBig(input BigInput) (ad *BigAD, result *big.Float) {
 
 // Calculate produces the next point on the Accumulation Distribution Line given the current period's information.
 func (ad *BigAD) Calculate(next BigInput) *big.Float {
+	if next.High.Cmp(next.Low) == 0 || next.Volume.Cmp(zero) == 0 {
+		return new(big.Float).Copy(ad.prev)
+	}
 	ad.prev.Add(new(big.Float).Mul(new(big.Float).Quo(new(big.Float).Sub(new(big.Float).Sub(next.Close, next.Low), new(big.Float).Sub(next.High, next.Close)), new(big.Float).Sub(next.High, next.Low)), next.Volume), ad.prev)
 	return new(big.Float).Copy(ad.prev)
 }
