@@ -6,10 +6,10 @@ The Accumulation Distribution Line technical analysis algorithm implemented in G
 import "github.com/MicahParks/go-ad"
 ```
 
-## Usage
+# Usage
 For full examples, please see the `examples` directory.
 
-### Step 1
+## Step 1
 Gather the input for the current period.
 ```go
 input := ad.Input{
@@ -20,19 +20,19 @@ input := ad.Input{
 }
 ```
 
-### Step 2
+## Step 2
 Create the A/D data structure and get the first result
 ```go
 adLine, result := ad.New(input)
 ```
 
-### Step 3
+## Step 3
 Use the next period's data to calculate the next point on the A/D line. Repeat for all periods.
 ```go
 result = adLine.Calculate(input)
 ```
 
-## Somewhat complete example (without data)
+# Somewhat complete example (without data)
 ```go
 package main
 
@@ -68,7 +68,7 @@ func main() {
 }
 ```
 
-## Testing
+# Testing
 There is 100% test coverage and benchmarks for this project. Here is an example benchmark result:
 ```
 $ go test -bench .
@@ -82,7 +82,15 @@ PASS
 ok      github.com/MicahParks/go-ad     0.004s
 ```
 
-## Resources
+# Other Technical Algorithms
+Looking for some other technical analysis algorithms? Here are some other ones I've implemented:
+* Accumulation/Distribution (A/D): [go-ad](https://github.com/MicahParks/go-ad)
+* Chaikin: [go-chaikin](https://github.com/MicahParks/go-chaikin)
+* Moving Average Convergence Divergence (MACD), Exponential Moving Average (EMA), Simple Moving Average (SMA):
+  [go-ma](https://github.com/MicahParks/go-ma)
+* Relative Strength Index (RSI): [go-rsi](https://github.com/MicahParks/go-rsi)
+
+# Resources
 I built and tested this package using these resources:
 * [Investopedia](https://www.investopedia.com/terms/a/accumulationdistribution.asp)
 * [Invest Excel](https://investexcel.net/accumulation-distribution-line/)
